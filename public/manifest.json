@@ -8,8 +8,13 @@
   "short_name": "Pagbank",
   "icons": [
     {
-      "src": "logo.png",
+      "src": "/outliers/logo.png",
       "sizes": "1080x1080",
+      "type": "image/png"
+    },
+    {
+      "src": "/outliers/logo512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]

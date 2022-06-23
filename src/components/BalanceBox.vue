@@ -16,7 +16,7 @@ export default {
 
 <style scoped>
 .amount{
-    font-size: 60px;
+    font-size: 4em;
     margin: -15px 0 20px 0;
     padding: 0;
 }
