@@ -1,16 +1,16 @@
 {
-    "theme_color": "#f69435",
-    "background_color": "#f69435",
-    "display": "standalone",
-    "scope": "/",
-    "start_url": "https://isotopic.github.io/outliers/",
-    "name": "PagBank Prototype",
-    "short_name": "Pagbank",
-    "icons": [
-        {
-            "src": "/logo.png",
-            "sizes": "1080x1080",
-            "type": "image/png"
-        }
-    ]
+  "theme_color": "#f69435",
+  "background_color": "#f69435",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "https://isotopic.github.io/outliers/",
+  "name": "PagBank Prototype",
+  "short_name": "Pagbank",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "1080x1080",
+      "type": "image/png"
+    }
+  ]
 }
