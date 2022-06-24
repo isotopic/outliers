@@ -17,6 +17,7 @@
             <div class="resultbox">
                 Seu rendimento seria
                 <div class="profit"><span>R$</span>{{ formattedResultado }}</div>
+                <div class="fake-compare"><b>R${{ fakeCompare }}</b> a mais que a poupança!</div>
             </div>
 
             <div class="calcbox">
@@ -49,7 +50,7 @@
                             <div class="ativo-desc">Valor mínimo R${{ ativo.valorMin }},00</div>
                     </div>
                     <div class="ativo more-products">
-                        Conheça as outras opções de investimento
+                        Veja todas nossas opções de aplicações
                     </div>
                 </div>
 
@@ -58,8 +59,8 @@
 
             </div>
             <div class="bottombox">
-                <div class="invest-bt">Invista agora</div>
-                <div class="more-bt">Conheça mais</div>
+                <div class="invest-bt"><span class="material-symbols-outlined">add_circle</span> Investir agora</div>
+                <div class="more-bt">Tire suas dúvidas sobre investimentos</div>
 
             </div>
 
@@ -180,6 +181,9 @@ export default {
     computed: {
         formattedResultado() {
             return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(this.resultado).split("R$")[1]
+        },
+        fakeCompare() {
+            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(this.resultado * 0.5).split("R$")[1]
         }
     },
     mounted() {
@@ -244,6 +248,19 @@ export default {
 <style scoped>
 .checked {
     opacity: 1 !important;
+}
+
+.fake-compare {
+    font-size: 12px;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 6px 15px;
+    display: inline-block;
+    color: #666
+}
+
+.fake-compare b {
+    color: #000;
 }
 
 .more-products {
@@ -410,26 +427,27 @@ export default {
     background-color: #fff;
 }
 
+.invest-bt span {
+    vertical-align: bottom;
+    font-size: 20px;
+}
+
 .more-bt {
-    max-width: 160px;
     margin: 0 auto;
-    font-size: 15px;
-    border-radius: 20px;
+    font-size: 12px;
     color: #fff;
     font-weight: bold;
-    text-transform: uppercase;
+
 }
 
 .bottombox {
     text-align: center;
     background-color: #4ea3ce;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
-    padding: 50px 20px;
+    border-top: 8px solid #f4f4f4;
+    padding: 40px 20px 30px;
 }
 
 .bottombox>div {
-    display: inline-block;
     padding: 10px 20px;
 }
 

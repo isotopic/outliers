@@ -34,6 +34,7 @@ export default {
 
 .amount .time {
   font-size: 0.6em;
+  color: #666 !important;
   letter-spacing: 0 !important;
 }
 
