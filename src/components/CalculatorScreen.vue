@@ -24,7 +24,7 @@
                 <span class="material-symbols-outlined box-icon">monetization_on</span>
                 <div class="labels">Aplicando <span>R${{ valorAportado }},00</span></div>
                 <vue-slider v-model="valorAportado" :dotSize="18" :min="getAtivo().valorMin" :max="balance * 2"
-                    tooltip="none" :interval=50 />
+                    tooltip="none" />
             </div>
 
             <div class="calcbox">
