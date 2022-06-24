@@ -17,26 +17,26 @@
             <div class="resultbox">
                 Seu rendimento seria
                 <div class="profit"><span>R$</span>{{ formattedResultado }}</div>
-                <div class="invest-bt">Investir agora</div>
             </div>
 
             <div class="calcbox">
                 <span class="material-symbols-outlined box-icon">monetization_on</span>
                 <div class="labels">Com <span>R${{ valorAportado }},00</span> investidos</div>
-                <vue-slider v-model="valorAportado" :dotSize="18" :min="getAtivo().valorMin" :max="balance"
+                <vue-slider v-model="valorAportado" :dotSize="18" :min="getAtivo().valorMin" :max="balance * 2"
                     tooltip="none" :interval=1 />
             </div>
 
             <div class="calcbox">
                 <span class="material-symbols-outlined box-icon">calendar_month</span>
                 <div class="labels">Durante <span>{{ tempoInvestido }} meses</span></div>
-                <vue-slider v-model="tempoInvestido" :dotSize=18 :min=1 :max=12 tooltip="none" />
+                <vue-slider v-model="tempoInvestido" :dotSize=18
+                    :min="getAtivo().vencimento > 0 ? getAtivo().vencimento : 1" :max=12 tooltip="none" />
             </div>
 
             <div class="ativos">
 
                 <div class="ativo" :class="{ 'checked': checked == ativo._id }" v-for="ativo in ativos" :key="ativo._id"
-                    @click="event => checked = ativo._id">
+                    @click="clickAtivo(ativo._id)">
                     <span class="material-symbols-outlined check-icon">{{ checked == ativo._id ?
                             'radio_button_checked'
                             : 'radio_button_unchecked'
@@ -51,10 +51,13 @@
                 </div>
 
 
+                <div class="bottombox">
+                    <div class="invest-bt">Investir agora</div>
+                    <div class="more-bt">Conheça mais</div>
+
+                </div>
+
             </div>
-
-
-
 
         </div>
 </template>
@@ -71,6 +74,9 @@ export default {
         VueSlider
     },
     methods: {
+        clickAtivo(id) {
+            this.checked = id;
+        },
 
         toDecimal(value) {
             return value / 100
@@ -102,7 +108,6 @@ export default {
 
         rentabilidadeCDB(aporte, tempoInvestido, cdi, ativo) {
             if (aporte >= ativo.valorMin) {
-                console.log(aporte, tempoInvestido, cdi, ativo);
                 if (ativo.resgate == 'Vencimento' && (tempoInvestido < ativo.vencimento || tempoInvestido > ativo.vencimento)) {
                     this.resultado = 0;
                 }
@@ -150,10 +155,17 @@ export default {
 
         refresh() {
             this.rentabilidadeCDB(this.valorAportado, this.tempoInvestido, this.CDI, this.getAtivo())
-        }
+            this.validaAtivos()
+        },
 
+        validaAtivos() {
+            //  const best = this.melhorInvestimento(this.ativos, this.valorAportado, this.tempoInvestido);
+        }
     },
     watch: {
+        checked() {
+            this.refresh()
+        },
         valorAportado() {
             this.refresh()
         },
@@ -168,6 +180,7 @@ export default {
     },
     mounted() {
         this.refresh();
+        this.valorAportado = this.balance;
         //('getMelhorInvestimento', this.melhorInvestimento(this.ativos, this.valorAportado, this.calcTempoAno))
     },
     data() {
@@ -175,7 +188,7 @@ export default {
             CDI: .1315,
             valorAportado: 1000,
             tempoInvestido: 6,
-            checked: 2,
+            checked: 3,
             resultado: 0,
             ativos: [
                 {
@@ -360,7 +373,7 @@ export default {
 }
 
 .profit {
-    font-size: 40px;
+    font-size: 50px;
     font-weight: bold;
     margin-bottom: 00px;
     color: #4ca63d;
@@ -384,6 +397,22 @@ export default {
     font-weight: regular;
     text-transform: uppercase;
     background-color: #4ea3ce;
+}
+
+.more-bt {
+    max-width: 160px;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-size: 15px;
+    border-radius: 20px;
+    padding: 10px 10px;
+    color: #333;
+    font-weight: regular;
+    text-transform: uppercase;
+}
+
+.bottombox {
+    text-align: center;
 }
 
 .check-icon {

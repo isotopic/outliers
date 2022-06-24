@@ -81,7 +81,7 @@ export default {
   max-width: 428px;
   margin: 0 auto;
   margin-top: 50px;
-  margin-top: 50px;
+  margin-bottom: 50px;
   padding: 0;
   clear: both;
   background-color: #f4f4f4;
@@ -158,7 +158,7 @@ export default {
     max-width: 428px;
     margin: 0 auto;
     margin-top: 50px;
-    margin-top: 50px;
+    margin-bottom: 50px;
     padding: 0;
     clear: both;
     border-radius: 30px;

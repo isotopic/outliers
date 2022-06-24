@@ -2,7 +2,7 @@
   <div class="mini-box mini-box-calculator" @click="$emit('go')">
     <div class="title">Turbinar saldo</div>
     <div class="amount">
-      <span class="material-symbols-outlined">add_circle</span> R$ 156,81 <span class="time">em 3 meses</span>
+      <span class="material-symbols-outlined">add_circle</span> R$ 282,69 <span class="time">em 6 meses</span>
     </div>
     <div class="material-symbols-outlined next-button">arrow_forward_ios</div>
   </div>
@@ -21,6 +21,7 @@ export default {
 .mini-box-calculator {
   background-color: white;
   position: relative;
+  cursor: pointer;
 }
 
 .title {
