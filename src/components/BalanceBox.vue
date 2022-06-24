@@ -1,8 +1,9 @@
 <template>
-<div class="mini-box">
-  <h1 class="title">Saldo</h1>
-  <h2 class="amount">R$ 2001,00</h2>
-</div>
+  <div class="mini-box">
+    <div class="title">Saldo</div>
+    <div class="amount">R$ 5.250,00</div>
+    <div class="material-symbols-outlined eye-button">visibility_off</div>
+  </div>
 </template>
 
 <script>
@@ -15,9 +16,15 @@ export default {
 </script>
 
 <style scoped>
-.amount{
-    font-size: 4em;
-    margin: -15px 0 20px 0;
-    padding: 0;
+.mini-box {
+  position: relative;
+}
+
+.eye-button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  color: #e0f598;
+  font-size: 22px;
 }
 </style>

@@ -6298,6 +6298,11 @@ vue-loader@^17.0.0:
     hash-sum "^2.0.0"
     loader-utils "^2.0.0"
 
+vue-slider-component@^4.0.0-beta.8:
+  version "4.0.0-beta.8"
+  resolved "https://registry.yarnpkg.com/vue-slider-component/-/vue-slider-component-4.0.0-beta.8.tgz#33bccd9c9f2e906aadbddaa358acea43a83e0c6f"
+  integrity sha512-wytXPpObB5Wm7FrEIJX8SSYNAVplB2JvZLUgFONY8R5mlCwKarUq4sOVEBaqJbRR2LCLxbegFl/NfylU+lS2dw==
+
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.3:
   version "4.1.3"
   resolved "https://registry.npmmirror.com/vue-style-loader/-/vue-style-loader-4.1.3.tgz#6d55863a51fa757ab24e89d9371465072aa7bc35"

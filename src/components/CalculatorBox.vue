@@ -1,7 +1,11 @@
 <template>
-<div class="mini-box">
-  <h1 class="title">Calc</h1>
-</div>
+  <div class="mini-box mini-box-calculator" @click="$emit('go')">
+    <div class="title">Turbinar saldo</div>
+    <div class="amount">
+      <span class="material-symbols-outlined">add_circle</span> R$ 156,81 <span class="time">em 3 meses</span>
+    </div>
+    <div class="material-symbols-outlined next-button">arrow_forward_ios</div>
+  </div>
 </template>
 
 <script>
@@ -14,5 +18,33 @@ export default {
 </script>
 
 <style scoped>
+.mini-box-calculator {
+  background-color: white;
+  position: relative;
+}
 
+.title {
+  color: black;
+}
+
+.amount {
+  color: #1b8914;
+}
+
+.amount .time {
+  font-size: 0.6em;
+  letter-spacing: 0 !important;
+}
+
+.material-symbols-outlined {
+  font-size: 0.7em;
+}
+
+.next-button {
+  position: absolute;
+  right: 10px;
+  top: calc(50% - 10px);
+  color: #666;
+  font-size: 18px;
+}
 </style>
