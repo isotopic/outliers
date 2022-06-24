@@ -1,7 +1,7 @@
 <template>
   <div class="mini-box">
     <div class="title">Saldo</div>
-    <div class="amount">R$ 5.250,00</div>
+    <div class="amount">R$ {{ formattedBalance }}</div>
     <div class="material-symbols-outlined eye-button">visibility_off</div>
   </div>
 </template>
@@ -10,7 +10,12 @@
 export default {
   name: 'BalanceBox',
   props: {
-
+    balance: Number
+  },
+  computed: {
+    formattedBalance() {
+      return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(this.balance).split("R$")[1]
+    }
   }
 }
 </script>

@@ -5,14 +5,14 @@
       <div v-if="page === 'home'">
         <img class="fakes" src="../assets/fake-header.png" />
         <div class="minibox-container">
-          <BalanceBox />
+          <BalanceBox :balance="balance" />
           <CalculatorBox @go="changePage('calculator')" />
         </div>
         <img class="fakes" src="../assets/fake-bottom.png" />
       </div>
 
       <div v-if="page === 'calculator'">
-        <CalculatorScreen @go="changePage('home')" />
+        <CalculatorScreen @go="changePage('home')" :balance="balance" />
       </div>
     </TransitionGroup>
 
@@ -27,7 +27,8 @@ export default {
   name: 'PhoneFrame',
   data() {
     return {
-      page: 'home'
+      page: 'home',
+      balance: 5000
     }
   },
   components: {

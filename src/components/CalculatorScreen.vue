@@ -14,11 +14,17 @@
                 investimento.
             </div>
 
+            <div class="resultbox">
+                Seu rendimento seria
+                <div class="profit"><span>R$</span>{{ formattedResultado }}</div>
+                <div class="invest-bt">Investir agora</div>
+            </div>
 
             <div class="calcbox">
-                <span class="material-symbols-outlined box-icon">savings</span>
-                <div class="labels"><span>R${{ valorAportado }},00</span> investidos</div>
-                <vue-slider v-model="valorAportado" :dotSize="18" :min=100 :max=2000 tooltip="none" :interval=50 />
+                <span class="material-symbols-outlined box-icon">monetization_on</span>
+                <div class="labels">Com <span>R${{ valorAportado }},00</span> investidos</div>
+                <vue-slider v-model="valorAportado" :dotSize="18" :min="getAtivo().valorMin" :max="balance"
+                    tooltip="none" :interval=1 />
             </div>
 
             <div class="calcbox">
@@ -26,7 +32,9 @@
                 <div class="labels">Durante <span>{{ tempoInvestido }} meses</span></div>
                 <vue-slider v-model="tempoInvestido" :dotSize=18 :min=1 :max=12 tooltip="none" />
             </div>
+
             <div class="ativos">
+
                 <div class="ativo" :class="{ 'checked': checked == ativo._id }" v-for="ativo in ativos" :key="ativo._id"
                     @click="event => checked = ativo._id">
                     <span class="material-symbols-outlined check-icon">{{ checked == ativo._id ?
@@ -37,16 +45,14 @@
                     <div class="ativo-desc">Resgate {{ ativo.vencimento < 0 ? 'diário' : 'após ' + ativo.vencimento
                             + ' meses'
                     }}</div>
+                            <div class="ativo-desc">Rentabilidade {{ ativo.rentabilidadeDoCDI }}%</div>
+                            <div class="ativo-desc">Valor mínimo R${{ ativo.valorMin }},00</div>
                     </div>
                 </div>
 
-                <div class="resultbox">
-                    Seu rendimento seria
-                    <div class="profit"><span>R$</span>{{ resultado > 0 ? resultado : '' }}</div>
-                    <div class="invest-bt">Investir agora</div>
-                </div>
 
             </div>
+
 
 
 
@@ -59,7 +65,7 @@ import 'vue-slider-component/theme/antd.css'
 export default {
     name: 'CalculatorScreen',
     props: {
-
+        balance: Number
     },
     components: {
         VueSlider
@@ -113,7 +119,7 @@ export default {
                     valorLiquido,
                 }
 
-                this.resultado = valorLiquido
+                this.resultado = valorLiquido - aporte;
                 return values
             } else {
                 this.resultado = 0;
@@ -132,28 +138,37 @@ export default {
                 }
             }
 
-            this.resultado = valorMelhorAtivo;
             return {
                 ativo: melhorAtivo,
                 valorLiquido: valorMelhorAtivo
             }
         },
 
-        getAtivoById(id) {
-            return this.ativos.find(value => value._id == id);
+        getAtivo() {
+            return this.ativos.find(value => value._id == this.checked);
+        },
+
+        refresh() {
+            this.rentabilidadeCDB(this.valorAportado, this.tempoInvestido, this.CDI, this.getAtivo())
         }
-
-
-
 
     },
     watch: {
         valorAportado() {
-            this.rentabilidadeCDB(this.valorAportado, this.tempoInvestido, this.CDI, this.getAtivoById(this.checked))
+            this.refresh()
         },
         tempoInvestido() {
-            this.rentabilidadeCDB(this.valorAportado, this.tempoInvestido, this.CDI, this.getAtivoById(this.checked))
+            this.refresh()
         }
+    },
+    computed: {
+        formattedResultado() {
+            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(this.resultado).split("R$")[1]
+        }
+    },
+    mounted() {
+        this.refresh();
+        //('getMelhorInvestimento', this.melhorInvestimento(this.ativos, this.valorAportado, this.calcTempoAno))
     },
     data() {
         return {
@@ -257,7 +272,7 @@ export default {
     max-width: 100%;
     width: 300px;
     margin: 0 auto !important;
-    margin-top: -20px;
+    margin-top: -60px;
     margin-bottom: 20px;
     text-align: center;
 }
