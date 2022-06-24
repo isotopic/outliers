@@ -21,16 +21,16 @@
 
             <div class="calcbox">
                 <span class="material-symbols-outlined box-icon">monetization_on</span>
-                <div class="labels">Com <span>R${{ valorAportado }},00</span> investidos</div>
+                <div class="labels">Aplicando <span>R${{ valorAportado }},00</span></div>
                 <vue-slider v-model="valorAportado" :dotSize="18" :min="getAtivo().valorMin" :max="balance * 2"
-                    tooltip="none" :interval=1 />
+                    tooltip="none" :interval=50 />
             </div>
 
             <div class="calcbox">
                 <span class="material-symbols-outlined box-icon">calendar_month</span>
                 <div class="labels">Durante <span>{{ tempoInvestido }} meses</span></div>
                 <vue-slider v-model="tempoInvestido" :dotSize=18
-                    :min="getAtivo().vencimento > 0 ? getAtivo().vencimento : 1" :max=12 tooltip="none" />
+                    :min="getAtivo().vencimento > 0 ? getAtivo().vencimento : 1" :max=12 tooltip="none" interval=1 />
             </div>
 
             <div class="ativos">
@@ -48,14 +48,18 @@
                             <div class="ativo-desc">Rentabilidade {{ ativo.rentabilidadeDoCDI }}%</div>
                             <div class="ativo-desc">Valor mínimo R${{ ativo.valorMin }},00</div>
                     </div>
+                    <div class="ativo more-products">
+                        Conheça as outras opções de investimento
+                    </div>
                 </div>
 
 
-                <div class="bottombox">
-                    <div class="invest-bt">Investir agora</div>
-                    <div class="more-bt">Conheça mais</div>
 
-                </div>
+
+            </div>
+            <div class="bottombox">
+                <div class="invest-bt">Invista agora</div>
+                <div class="more-bt">Conheça mais</div>
 
             </div>
 
@@ -242,6 +246,14 @@ export default {
     opacity: 1 !important;
 }
 
+.more-products {
+    color: #666 !important;
+    font-size: 14px;
+    text-align: center;
+    padding: 15px;
+    border-top: 2px dashed #ddd;
+}
+
 .ativos {
     background-color: #fff;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
@@ -347,6 +359,7 @@ export default {
 
 .calcbox .labels {
     margin-bottom: 10px;
+    ;
 }
 
 .calcbox span {
@@ -359,7 +372,7 @@ export default {
     float: right;
     font-size: 35px !important;
     margin: -5px;
-    color: #eee !important;
+    color: #ddd !important;
 }
 
 .resultbox {
@@ -389,30 +402,35 @@ export default {
 .invest-bt {
     max-width: 160px;
     margin: 0 auto;
-    margin-top: 20px;
     font-size: 15px;
     border-radius: 20px;
-    padding: 10px 10px;
-    color: white;
-    font-weight: regular;
+    color: #4ea3ce;
+    font-weight: bold;
     text-transform: uppercase;
-    background-color: #4ea3ce;
+    background-color: #fff;
 }
 
 .more-bt {
     max-width: 160px;
     margin: 0 auto;
-    margin-top: 20px;
     font-size: 15px;
     border-radius: 20px;
-    padding: 10px 10px;
-    color: #333;
-    font-weight: regular;
+    color: #fff;
+    font-weight: bold;
     text-transform: uppercase;
 }
 
 .bottombox {
     text-align: center;
+    background-color: #4ea3ce;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding: 50px 20px;
+}
+
+.bottombox>div {
+    display: inline-block;
+    padding: 10px 20px;
 }
 
 .check-icon {
